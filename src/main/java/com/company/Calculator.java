@@ -12,7 +12,7 @@ public interface Calculator {
     /**
      * Evaluate instruction to list of outputs.
      * @return {@link List} of outputs being {@link Integer}
-     * @throws DivideByZeroException when user tries to divided by zero
+     * @throws DivideByZeroException when user tries to divide by zero
      */
     List<Integer> calculate(List<String> instructions) throws DivideByZeroException;
 }

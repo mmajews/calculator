@@ -11,8 +11,8 @@ import java.util.function.BiFunction;
 /**
  * Implementation of {@link Calculator} supporting following operations:
  * ADD
- * MULTIPLY
- * DIVIDE
+ * MULTIPLY BY
+ * DIVIDE BY
  * SUBTRACT
  * DISPLAY
  */
@@ -41,9 +41,15 @@ public class SimpleCalculator implements Calculator {
             }
 
             String[] splitExpression = instruction.split("\\s+");
-            String operation = splitExpression[0];
-            int valueFromInstruction = Integer.parseInt(splitExpression[1]);
 
+            int valueFromInstruction;
+            if(splitExpression.length == 3){
+                valueFromInstruction = Integer.parseInt(splitExpression[2]);
+            } else {
+                valueFromInstruction = Integer.parseInt(splitExpression[1]);
+            }
+
+            String operation = splitExpression[0];
             if (DIVIDE_COMMAND.equals(operation) && valueFromInstruction == 0) {
                 throw new DivideByZeroException("User tried to divided by 0, expr: " + instruction);
             }
