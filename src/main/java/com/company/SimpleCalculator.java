@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.exceptions.DivideByZeroException;
 
+import java.nio.charset.CharacterCodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,14 +19,14 @@ import java.util.function.BiFunction;
  */
 public class SimpleCalculator implements Calculator {
     private static final String DISPLAY_COMMAND = "DISPLAY";
-    public static final String DIVIDE_COMMAND = "DIVIDE";
+    public static final String DIVIDE_COMMAND = "DIVIDE BY";
 
     private Map<String, BiFunction<Integer, Integer, Integer>> commandToOperation;
 
     public SimpleCalculator() {
         this.commandToOperation = new HashMap<>();
         commandToOperation.put("ADD", Integer::sum);
-        commandToOperation.put("MULTIPLY", (integer, integer2) -> integer * integer2);
+        commandToOperation.put("MULTIPLY BY", (integer, integer2) -> integer * integer2);
         commandToOperation.put("SUBTRACT", (integer, integer2) -> integer - integer2);
         commandToOperation.put(DIVIDE_COMMAND, (integer, integer2) -> integer / integer2);
     }
@@ -40,16 +41,10 @@ public class SimpleCalculator implements Calculator {
                 continue;
             }
 
-            String[] splitExpression = instruction.split("\\s+");
-
-            int valueFromInstruction;
-            if(splitExpression.length == 3){
-                valueFromInstruction = Integer.parseInt(splitExpression[2]);
-            } else {
-                valueFromInstruction = Integer.parseInt(splitExpression[1]);
-            }
-
+            String[] splitExpression = splitToCommandAndNumber(instruction);
             String operation = splitExpression[0];
+            int valueFromInstruction = Integer.parseInt(splitExpression[1]);
+
             if (DIVIDE_COMMAND.equals(operation) && valueFromInstruction == 0) {
                 throw new DivideByZeroException("User tried to divided by 0, expr: " + instruction);
             }
@@ -58,5 +53,15 @@ public class SimpleCalculator implements Calculator {
         }
 
         return results;
+    }
+
+    private String[] splitToCommandAndNumber(String input) {
+        int indexToSplit = input.length() - 1;
+        for (; indexToSplit >= 0; indexToSplit--) {
+            if (!Character.isDigit(input.charAt(indexToSplit))) {
+                break;
+            }
+        }
+        return new String[]{input.substring(0, indexToSplit).trim(), input.substring(indexToSplit).trim()};
     }
 }

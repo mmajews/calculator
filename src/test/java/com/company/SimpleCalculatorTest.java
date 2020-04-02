@@ -2,7 +2,6 @@ package com.company;
 
 import com.company.exceptions.DivideByZeroException;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
