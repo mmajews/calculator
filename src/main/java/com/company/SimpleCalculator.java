@@ -18,7 +18,7 @@ import java.util.function.BiFunction;
  */
 public class SimpleCalculator implements Calculator {
     private static final String DISPLAY_COMMAND = "DISPLAY";
-    public static final String DIVIDE_COMMAND = "DIVIDE BY";
+    private static final String DIVIDE_COMMAND = "DIVIDE BY";
 
     private Map<String, BiFunction<Integer, Integer, Integer>> commandToOperation;
 
