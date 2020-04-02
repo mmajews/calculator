@@ -2,7 +2,6 @@ package com.company;
 
 import com.company.exceptions.DivideByZeroException;
 
-import java.nio.charset.CharacterCodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +40,7 @@ public class SimpleCalculator implements Calculator {
                 continue;
             }
 
-            String[] splitExpression = splitToCommandAndNumber(instruction);
+            String[] splitExpression = splitToCommandAndArgument(instruction);
             String operation = splitExpression[0];
             int valueFromInstruction = Integer.parseInt(splitExpression[1]);
 
@@ -55,7 +54,7 @@ public class SimpleCalculator implements Calculator {
         return results;
     }
 
-    private String[] splitToCommandAndNumber(String input) {
+    private String[] splitToCommandAndArgument(String input) {
         int indexToSplit = input.length() - 1;
         for (; indexToSplit >= 0; indexToSplit--) {
             if (!Character.isDigit(input.charAt(indexToSplit))) {
