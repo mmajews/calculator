@@ -31,7 +31,7 @@ public class SimpleCalculator implements Calculator {
     }
 
     @Override
-    public List<Integer> calculate(List<String> instructions) {
+    public List<Integer> calculate(List<String> instructions) throws DivideByZeroException {
         List<Integer> results = new ArrayList<>();
         int currentValue = 0;
         for (String instruction : instructions) {
@@ -41,8 +41,8 @@ public class SimpleCalculator implements Calculator {
             }
 
             String[] splitExpression = instruction.split("\\s+");
-            int valueFromInstruction = Integer.parseInt(splitExpression[1]);
             String operation = splitExpression[0];
+            int valueFromInstruction = Integer.parseInt(splitExpression[1]);
 
             if (DIVIDE_COMMAND.equals(operation) && valueFromInstruction == 0) {
                 throw new DivideByZeroException("User tried to divided by 0, expr: " + instruction);
