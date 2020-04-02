@@ -82,7 +82,7 @@ public class SimpleCalculatorTest {
     }
 
     @Test
-    public void shouldCorrectlyGiveResultsWithMultipleDivides(){
+    public void shouldCorrectlyGiveResultsWithMultipleDisplays(){
         List<String> input = new ArrayList<>();
         input.add("ADD 200");
         input.add("ADD 8");
