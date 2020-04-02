@@ -80,7 +80,28 @@ public class SimpleCalculatorTest {
         input.add("ADD 3");
 
         List<Integer> output = calculator.calculate(input);
+    }
 
+    @Test
+    public void shouldCorrectlyGiveResultsWithMultipleDivides(){
+        List<String> input = new ArrayList<>();
+        input.add("ADD 200");
+        input.add("ADD 8");
+        input.add("MULTIPLY BY 3");
+        input.add("DIVIDE BY 5");
+        input.add("ADD 3");
+        input.add("DISPLAY");
+        input.add("ADD 10");
+        input.add("SUBTRACT 5");
+        input.add("DISPLAY");
+        input.add("ADD 50");
+        input.add("DISPLAY");
+
+        List<Integer> output = calculator.calculate(input);
+        Assert.assertEquals(3, output.size());
+        Assert.assertEquals(127, (int)output.get(0));
+        Assert.assertEquals(132, (int)output.get(1));
+        Assert.assertEquals(182, (int)output.get(2));
     }
 
 }
