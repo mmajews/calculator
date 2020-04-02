@@ -1,11 +1,12 @@
 package com.company;
 
+import com.company.exceptions.DivideByZeroException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 /**
  * Implementation of {@link Calculator} supporting following operations:
@@ -34,16 +35,17 @@ public class SimpleCalculator implements Calculator {
         List<Integer> results = new ArrayList<>();
         int currentValue = 0;
         for (String instruction : instructions) {
+            if (DISPLAY_COMMAND.equals(instruction)) {
+                results.add(currentValue);
+                continue;
+            }
+
             String[] splitExpression = instruction.split("\\s+");
             int valueFromInstruction = Integer.parseInt(splitExpression[1]);
             String operation = splitExpression[0];
-            if(DISPLAY_COMMAND.equals(operation)){
-                results.add(currentValue);
-                currentValue = 0;
-            }
 
-            if(DISPLAY_COMMAND.equals(operation)){
-                //handle case with zero
+            if (DIVIDE_COMMAND.equals(operation) && valueFromInstruction == 0) {
+                throw new DivideByZeroException("User tried to divided by 0, expr: " + instruction);
             }
 
             currentValue = commandToOperation.get(operation).apply(currentValue, valueFromInstruction);

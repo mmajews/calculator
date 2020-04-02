@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.exceptions.DivideByZeroException;
+
 import java.util.List;
 
 /**
@@ -11,5 +13,5 @@ public interface Calculator {
      * Evaluate instruction to list of outputs.
      * @return {@link List} of outputs being {@link Integer}
      */
-    List<Integer> calculate(List<String> instructions);
+    List<Integer> calculate(List<String> instructions) throws DivideByZeroException;
 }
